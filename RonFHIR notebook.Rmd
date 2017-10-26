@@ -1,0 +1,196 @@
+---
+title: "R on FHIR example"
+output:
+  html_document: default
+  html_notebook: default
+---
+Install the RonFHIR library
+```{r}
+# install.packages("RonFHIR")
+
+library(RonFHIR)
+library(dplyr)
+library(purrr)
+```
+a tidy data frame for 50 patients' basic demographic details
+
+```{r}
+
+
+
+basic_patient_details <- function(patient){
+      tibble(
+          name = patient$name[[1]]$family[patient$name[[1]]$use == "official"],
+          home_phone = patient$telecom[[1]]$value[patient$telecom[[1]]$use == "home"],
+          gender = patient$gender,
+          birthDate = as.Date(patient$birthDate),
+          city = patient$address[[1]]$city
+    )
+
+}
+
+client = fhirClient$new("http://test.fhir.org/r3")
+patients = client$read(location = "Patient", summaryType = "json")
+
+patients_df <- patients$entry[[1]]$resource
+
+
+
+nrows <- nrow(patients_df)
+
+map_dfr(seq_len(nrows),
+        function(x, patients){
+        basic_patient_details(patients[x, ])
+        }
+        , patients = patients_df)
+
+```
+
+
+
+Connect to the FHIR API
+```{r}
+client = fhirClient$new("http://test.fhir.org/r3")
+```
+Ask for a patient
+
+```{r}
+patient = client$read(location = "Patient/example", summaryType = "json")
+```
+Work with the patient's name data
+```{r}
+patient_name <- patient$name[[1]]
+
+current_patient_name <- patient_name[patient_name$use == "official",]
+
+paste("Surname:", current_patient_name$family)
+paste("Given names:", current_patient_name$given)
+paste("Patient UR:",patient$identifier[[1]]$value[1])
+
+
+
+
+
+```
+
+
+Lets get a bunch of patients
+```{r}
+patients = client$read(location = "Patient", summaryType = "json")
+
+```
+HOw many patients do i have in R?
+```{r}
+patients$total
+```
+Look at the link i.e. helps determine of there is more data to slurp
+```{r}
+patients$link[[1]]
+
+```
+The actual patient data seems to be in a list column called "entry"
+in entry is a dataframe
+```{r}
+head(patients$entry[[1]]$fullUrl)
+```
+The actual patient records may be in the column call resource
+```{r}
+patients_df <- patients$entry[[1]]$resource
+```
+
+explore the patient_df
+```{r}
+names(patients_df)
+head(patients_df$name)
+map(patients_df,typeof)
+```
+
+
+1st patient
+```{r}
+
+first_patient <- patients_df[1, ]
+#exclude photo
+head(first_patient[,-14])
+```
+
+```{r}
+first_patient_df <- tibble(
+name = first_patient$name[[1]]$family[first_patient$name[[1]]$use == "official"],
+home_phone = first_patient$telecom[[1]]$value[first_patient$telecom[[1]]$use == "home"],
+gender = first_patient$gender,
+birthDate = as.Date(first_patient$birthDate),
+city = first_patient$address[[1]]$city
+)
+first_patient_df
+
+```
+create a function to pull this dat for each patient into one dataframe
+```{r}
+basic_patient_details <- function(patient){
+      tibble(
+          name = patient$name[[1]]$family[patient$name[[1]]$use == "official"],
+          home_phone = patient$telecom[[1]]$value[patient$telecom[[1]]$use == "home"],
+          gender = patient$gender,
+          birthDate = as.Date(patient$birthDate),
+          city = patient$address[[1]]$city
+    )
+
+}
+basic_patient_details(first_patient)
+```
+
+Apply this function to our dataset 
+```{r}
+nrows <- nrow(patients_df)
+
+
+basic_patient_details(patients_df[2, ])
+
+map_dfr(seq_len(nrows),
+        function(x, patients){
+        basic_patient_details(patients[x, ])
+        }
+        , patients = patients_df)
+```
+
+Bring it all together
+
+```{r}
+
+
+
+basic_patient_details <- function(patient){
+      tibble(
+          name = patient$name[[1]]$family[patient$name[[1]]$use == "official"],
+          home_phone = patient$telecom[[1]]$value[patient$telecom[[1]]$use == "home"],
+          gender = patient$gender,
+          birthDate = as.Date(patient$birthDate),
+          city = patient$address[[1]]$city
+    )
+
+}
+
+client = fhirClient$new("http://test.fhir.org/r3")
+patients = client$read(location = "Patient", summaryType = "json")
+
+patients_df <- patients$entry[[1]]$resource
+
+
+
+nrows <- nrow(patients_df)
+
+map_dfr(seq_len(nrows),
+        function(x, patients){
+        basic_patient_details(patients[x, ])
+        }
+        , patients = patients_df)
+
+```
+
+
+
+
+
+
+
