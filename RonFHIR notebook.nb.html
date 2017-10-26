@@ -175,25 +175,12 @@ $(document).ready(function () {
 <p>Install the RonFHIR library</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbnN0YWxsLnBhY2thZ2VzKFwiUm9uRkhJUlwiKVxubGlicmFyeShSb25GSElSKVxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbnN0YWxsLnBhY2thZ2VzKFwiUm9uRkhJUlwiKVxuXG5saWJyYXJ5KFJvbkZISVIpXG5saWJyYXJ5KGRwbHlyKVxubGlicmFyeShwdXJycilcbmBgYCJ9 -->
 <pre class="r"><code># install.packages(&quot;RonFHIR&quot;)
+
 library(RonFHIR)
-library(dplyr)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
-<pre><code>
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShwdXJycilcbmBgYCJ9 -->
-<pre class="r"><code>library(purrr)</code></pre>
+library(dplyr)
+library(purrr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -239,9 +226,6 @@ map_dfr(seq_len(nrows),
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xpZW50ID0gZmhpckNsaWVudCRuZXcoXCJodHRwOi8vdGVzdC5maGlyLm9yZy9yM1wiKVxuYGBgIn0= -->
 <pre class="r"><code>client = fhirClient$new(&quot;http://test.fhir.org/r3&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidW5rbm93biB0aW1lem9uZSAnZGVmYXVsdC9BdXN0cmFsaWEvTWVsYm91cm5lJ1xuIn0= -->
-<pre><code>unknown timezone 'default/Australia/Melbourne'</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Ask for a patient</p>
@@ -255,33 +239,24 @@ map_dfr(seq_len(nrows),
 <p>Work with the patient’s name data</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudF9uYW1lIDwtIHBhdGllbnQkbmFtZVtbMV1dXG5jdXJyZW50X3BhdGllbnRfbmFtZSA8LSBwYXRpZW50X25hbWVbcGF0aWVudF9uYW1lJHVzZSA9PSBcIm9mZmljaWFsXCIsXVxucGFzdGUoXCJTdXJuYW1lOlwiLCBjdXJyZW50X3BhdGllbnRfbmFtZSRmYW1pbHkpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudF9uYW1lIDwtIHBhdGllbnQkbmFtZVtbMV1dXG5cbmN1cnJlbnRfcGF0aWVudF9uYW1lIDwtIHBhdGllbnRfbmFtZVtwYXRpZW50X25hbWUkdXNlID09IFwib2ZmaWNpYWxcIixdXG5cbnBhc3RlKFwiU3VybmFtZTpcIiwgY3VycmVudF9wYXRpZW50X25hbWUkZmFtaWx5KVxucGFzdGUoXCJHaXZlbiBuYW1lczpcIiwgY3VycmVudF9wYXRpZW50X25hbWUkZ2l2ZW4pXG5wYXN0ZShcIlBhdGllbnQgVVI6XCIscGF0aWVudCRpZGVudGlmaWVyW1sxXV0kdmFsdWVbMV0pXG5cblxuXG5cblxuYGBgIn0= -->
 <pre class="r"><code>patient_name &lt;- patient$name[[1]]
+
 current_patient_name &lt;- patient_name[patient_name$use == &quot;official&quot;,]
-paste(&quot;Surname:&quot;, current_patient_name$family)</code></pre>
+
+paste(&quot;Surname:&quot;, current_patient_name$family)
+paste(&quot;Given names:&quot;, current_patient_name$given)
+paste(&quot;Patient UR:&quot;,patient$identifier[[1]]$value[1])
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiU3VybmFtZTogRXZlcnltYW5cIlxuIn0= -->
-<pre><code>[1] &quot;Surname: Everyman&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFzdGUoXCJHaXZlbiBuYW1lczpcIiwgY3VycmVudF9wYXRpZW50X25hbWUkZ2l2ZW4pXG5gYGAifQ== -->
-<pre class="r"><code>paste(&quot;Given names:&quot;, current_patient_name$given)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiR2l2ZW4gbmFtZXM6IEFkYW1cIlxuIn0= -->
-<pre><code>[1] &quot;Given names: Adam&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFzdGUoXCJQYXRpZW50IFVSOlwiLHBhdGllbnQkaWRlbnRpZmllcltbMV1dJHZhbHVlWzFdKVxuYGBgIn0= -->
-<pre class="r"><code>paste(&quot;Patient UR:&quot;,patient$identifier[[1]]$value[1])</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUGF0aWVudCBVUjogNjIyODgzMjQ1XCJcbiJ9 -->
-<pre><code>[1] &quot;Patient UR: 622883245&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Lets get a bunch of patients</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9IFwiUGF0aWVudFwiLCBzdW1tYXJ5VHlwZSA9IFwianNvblwiKVxuYGBgIn0= -->
-<pre class="r"><code>patients = client$read(location = &quot;Patient&quot;, summaryType = &quot;json&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9IFwiUGF0aWVudFwiLCBzdW1tYXJ5VHlwZSA9IFwianNvblwiKVxuXG5gYGAifQ== -->
+<pre class="r"><code>patients = client$read(location = &quot;Patient&quot;, summaryType = &quot;json&quot;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -291,24 +266,15 @@ paste(&quot;Surname:&quot;, current_patient_name$family)</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudHMkdG90YWxcbmBgYCJ9 -->
 <pre class="r"><code>patients$total</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2ODZcbiJ9 -->
-<pre><code>[1] 1686</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Look at the link i.e. helps determine of there is more data to slurp</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudHMkbGlua1tbMV1dXG5gYGAifQ== -->
-<pre class="r"><code>patients$link[[1]]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aWVudHMkbGlua1tbMV1dXG5cbmBgYCJ9 -->
+<pre class="r"><code>patients$link[[1]]
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUE4MVRTMDdETUJCMTh3RWFxWURFSGJKQitiUnBDMFdLMkhBQXhLcTd5SEdjSnBEWWtlMEkyQ0Z4RGhBbkxUaXBqV2k0UUNORk0vTm0zc3diYWZ4d3Q1NDVhd2NBWUFEVE1vQmhTbGRhQUViQUF1UE92Z0JnWHZRRkFKeDNXWld3T0s1eTVkdDV5YmpRQ1lKZmZ2MEtTbnlmK0Y0STBkd0VnY0JjK0hsUk1wK3lUY0NpNEI2S0VoTnhtK1NVMVZERXNHbXFFa21Ra3FDcnUzemtsTGdjUTRZS3I4emlNRU9yTEF3akQ2WHB5cHVuRUhuWDAxWGtMWmZSZkxaYzREeDEzWVMzZFEzWmE5eHpFMDZaaUpNeVUxSStEa0NLN2tMem5HTVJoMjZDYUV0RXZBaVZ5TS9ERTduNHIvTHI4RlJPbDNzNjkrL2FKckRHWEoybW9jQVRocXRlbVlyTmxsVUQzcGpSWjE5ekp4MzNEZlNmTlJ5QTVPM3JBUnAwTWlpZ256UEpsOUYyUURtbVRUZGNrb3p1eGRrRDhvZ05nTE9XZEVveUR4VXRlZkt1dWdGOWV2ZFBsTFgrK01adXBQR3RXdG1xMVJFbW01SmdyYjJDS2E1VWNDbzM3aGYyRzFZUy9iSWRpWEpmVUFGMW5ZTm9wWkYrTjdEOUFVT09GN1JmQkFBQSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["relation"],"name":[1],"type":["chr"],"align":["left"]},{"label":["url"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"self","2":"http://test.fhir.org/r3/Patient?_format=application/fhir+json&search-id=0dc9d003-cbb9-4bac-8193-6634265efb&&_summary=json&_sort=_id","_rn_":"1"},{"1":"first","2":"http://test.fhir.org/r3/Patient?_format=application/fhir+json&search-id=0dc9d003-cbb9-4bac-8193-6634265efb&&_summary=json&_sort=_id&search-offset=0&_count=50","_rn_":"2"},{"1":"next","2":"http://test.fhir.org/r3/Patient?_format=application/fhir+json&search-id=0dc9d003-cbb9-4bac-8193-6634265efb&&_summary=json&_sort=_id&search-offset=50&_count=50","_rn_":"3"},{"1":"last","2":"http://test.fhir.org/r3/Patient?_format=application/fhir+json&search-id=0dc9d003-cbb9-4bac-8193-6634265efb&&_summary=json&_sort=_id&search-offset=1650&_count=50","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>The actual patient data seems to be in a list column called “entry” in entry is a dataframe</p>
@@ -317,14 +283,6 @@ paste(&quot;Surname:&quot;, current_patient_name$family)</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChwYXRpZW50cyRlbnRyeVtbMV1dJGZ1bGxVcmwpXG5gYGAifQ== -->
 <pre class="r"><code>head(patients$entry[[1]]$fullUrl)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMDFjYjFlNi02MGI5LTQxMWEtOGE4Yy1hYTYyMmE3NGZjZGFcIlxuWzJdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMDczYWY4Ni0yNjVlLTQ4YzEtOWE4My1hYjVjNDQ5MDk2ZDJcIlxuWzNdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMGEyMTI3OS0zYjYwLTRjNWUtOWNiYy0zMjk2YzlkNWY5ZDZcIlxuWzRdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMGIwN2ZmZS05MzMyLTQ4NmItOWJiOC1mMWE3NDMzODVhZjZcIlxuWzVdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMTA2ZjhlZS0zZDNkLTRlZTYtYTAwZi04NmMyMzg4NmNhNmNcIlxuWzZdIFwiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMvUGF0aWVudC8wMTFlYmFhZS01YjVlLTRjMTctYTYwNy0yMjc4NWZkOGVjOTdcIlxuIn0= -->
-<pre><code>[1] &quot;http://test.fhir.org/r3/Patient/001cb1e6-60b9-411a-8a8c-aa622a74fcda&quot;
-[2] &quot;http://test.fhir.org/r3/Patient/0073af86-265e-48c1-9a83-ab5c449096d2&quot;
-[3] &quot;http://test.fhir.org/r3/Patient/00a21279-3b60-4c5e-9cbc-3296c9d5f9d6&quot;
-[4] &quot;http://test.fhir.org/r3/Patient/00b07ffe-9332-486b-9bb8-f1a743385af6&quot;
-[5] &quot;http://test.fhir.org/r3/Patient/0106f8ee-3d3d-4ee6-a00f-86c23886ca6c&quot;
-[6] &quot;http://test.fhir.org/r3/Patient/011ebaae-5b5e-4c17-a607-22785fd8ec97&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>The actual patient records may be in the column call resource</p>
@@ -348,18 +306,17 @@ map(patients_df,typeof)</code></pre>
 <p>1st patient</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MTYsIm5yb3ciOjF9LCJyZGYiOiJINHNJQUFBQUFBQUFBOFZaV1cvYlJoQ1dkZGlXVXFjT1hLQVBCUW9pRGRxMEFDVmVPbWk0UnV6WWJvUEVTV29uYVZBVUtGYmtVbHlFNUtyTHBZODg1VmYwejdRUC9UWDlEWDJxdXp5V0V0ZVVqOGhJQk1qVURuZG1aMlpuWnI5WkgreTgxbHF2VzVWS3BWcXAxYXVWYW8zOVpNOUtaYUZTcnpUajUwbWxVbHRqUDFhekwzK3g5QnhRQkFNcWtPOHBpbW9OVmRpVGU4clFsQTFWQmZJQURDd1pnSjZtZ2I3aFdEYklSTllFM2dWVklIeW1LV3BmVmhWWjY3NVE5SFhGV0ZmNnZ6RDZXaktuT1BlMVMrbDR2ZE1KS1Foc1FHd1hBbys2QkZxWTJHMU1SaDNIUmFSelNFbGswWWpBSGVpZ0FGR0VnMDdvRXRtR1BoNFJNSGFSRmNyUElRbHg4TXc1U0pnRmh6UUM0TU13Vzd5V0VadEhqSVhKZW1SbmhGc2VDT25Mc1EwbzVLU2xNY0VPOHFBZ3IwbndjWnZMWE1rTVd4QVh0Wmk4VUxDNHhhU0R0a01ZTHh2OWx6bTFLc3hxam1BQVNhSkg4Y1dmR3pZNmtrNThMd2kvdjVzNTcvajR1SDJzSis1U1RkUHNuTGpVOSs1dS9zQkZTTU5UYVFOSXpLMU95aE15cGhHaWJqUnNXOWp2aEtjQmRTRkZWdXI5YkF6dWJoNm1Qelk2WUxNdHZVcWRKU0dieFE5eUVDVHJrcUthd0JqMExlQ29wdEkxaDZyUlZiU3VNNFRhd0FhS3JxbUdiZzU3Mm1Danc3VGVUTjFUUGN0TXFtWW1MYkxOcDFHWWpXcHNaanF4ZG5iZXQvV3p5OXpKd3l4eDYxSTJ1NW5OTmpLUHVWNy80dWlLUXBsRkVaUUpzR0RHYTE2WEYxSTNRQmFpcDVrQTdhb0Nob2hROTdrM1dYcnJxcHpqTkx0bEg3TjlJK0UraURmcmFleWJWTkNETWtGUjJJbjF2ZENXUktVUW5tUnlIbDVYSVJSUVNNWUVzcjhIOFBjSWtUekJmcDJyQWdDTFlpTHZJU3VtQUMrdEFUSThvVENJZ3pWYjQ3ZWJxeko3SVBGczdOTnp5N2czdDh3aHRoRHdEcUVWRVJaQVR5Ti9DTW5VZXBPaXNaWkVkM2xsL3FKc2w0NzB6a0VjV2NXcGk1cXE5R1Jkb0RaK2RoR0ZRdHJXOHJROURTbjBzMUhkd2phUHNpVWJoV01QbkY0bFpjc1NQYStLb2tIU0RJTjI4MHc3WjlXZ0ozY0Y2cTJuT0hDWmhvRHhmQlRiTHZ4T2w2djZWUGxwd2lram0yZnNjLzFuZWZsbDFxRmd4SmVrTE1xdWJWejFYU1g1TkVzMnIzbE9qMVRhOGpiQjFoc2FSL08xN2JsSWJuVi82Nllsdmp5YzA5ZTFQSklteDBFalB2YnlzTEp3RkZCeS9iQVNQRC9EanFJOWEwOXc4QmIzVFVQYWRSeEk2RnREVXk0MUtNc2RoaS9rdmlIclhjMjhkTFVpNjhMZUZad1hnOXBtYkpMNHpUNExrM0Z0R2s5ZXJzVEZ5dDNaWm41Zzd0WDByblFBSXRQUVoremt3azNtU1VIeUVnZEFFZkU0a2o0Q1hnUWZzdW9EaGg1N0JoWWMwK3pkSjhtN0xkc21NT1RZNlZaQ1l3Zk1KSitidVlnQzN6YkdIZ1Q4NExxZDBINk1mSkNDaFhtRGNCcUM4VExBVStDN3F3UFFqT1BMc3FvZklqc0dKMkhJYlpBaUVxeGpaSzlyYmJYWEhoaEtXMjJycWo0WTZHMmpyYmUxcnFESFBjZTB1d045T0pCTlJlL0xSdGQyNUlGcVFMa1BqWjd0cUxhbDk3cmNpU3pxKzBZUzh4bmhrRkVNZ3pGT3hTRzNkaGFtLzZyTWpnbWFsdW5wV0R5V3E0ZmJNMEh6K1JOcTN1TldWTGdjUDJnZFJWTkVwRkRkZWZKaEZDMU5SbjZFdlcvYzFrcGtsME9CUnBJcGVRMUlkbXkrUlF2SlVoZWN0NHdkQjhWSWtDdmpKNGhlbU5WOEhJMWQ0QmtHRDgvRnZJU1ZiZXZLcnM4U1BZS2VCN3VxZHRuTE1nbjFmUksyUzN4V3owdFl5SDIwNkFBZmVmbVpOMEpIa0dmc0l1c0hISFJ5ZlFkbTBWQXRjYUNJR0J0akZ3ZGlWdDIrcjVubXQxS2ZuV085cmliQ3c3cUwvYXRoM2tJd0pEYlBBd29MQWUxQUgzaWkzaTNWSEppeVlzZ0szMXB1OXFJd3JwYU1DM0hsc2I2TVJ2bWgwUFJ3TUVvSnpEM3h4QWU3cS8vcy9mSHY5dDgvL1hYL0ZYMHptSkhkVTRkVmVyRHNRQXN4MWVmZTFHa3UvYXJkNWdoaUQxdUFKaTFTcWI1TnNXZExESmhuMjZaUkNGL2xqcTdwbXZUc204YzRrQjVpMzg5WGF4NUdyS0dTMUg1UFdHdDVhOGdLV0FxR3Ara3BtQzFFdE1Jd2luamxsaURVZ3NHTHN3eXVleWpJQzlnc09Ob2FZemIwcG1ERGV3UFVza09tTERUenE4Z1pQZDQrWUowd2E0blR1eUxoQ25ML3d4dytWMXgwVmtQMW5oZGFyWXlqSW5odVFjQWVzMnJnMTJVZWZaVWdSVWc3SGdoR0VSaEIwYWNOR01oSjN6Tk4vSHczR0hrb2RLWDdMMW5LUVZ1S3R3T0czMzZVTnZwR29jQmxjcGU1bjI0Z2ZpWXRTUEwrWGJLemhWVlhlVTFsNEI1SHhJSXZZcVNSNVRyaVYyZDFIMUpRQ0xNWk9kK2FvRXcrUFpoY0NpNVI2RUVHdzdrSFJ6Q3c4NG5ONU9adlo2cFRCWVdXWThVdjVHWFd0L2lSUjlIWWc5c3hjN0hYV0dFcitWR0FzaktkRWxkdGFFRVFRanRlNkFYS1ZTc0tlaFJRT0dLYXpaRk1oZnY1SlR5T2RXQ1JYNDN6cGlFbU9CRUluMFpCN0RaYnR0d29lQ09yVTdtNUlHdzIvNzBxYkd5RE94bXk4emF2d3cwUERDRS9SMjhUZkp6OFo2RTlabjBjMzlNV280WnRpbW1PQlZzVzlqZ2x1ejc2SC9QdFFOa1pHZ0FBIn0= -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["resourceType"],"name":[1],"type":["chr"],"align":["left"]},{"label":["id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["meta"],"name":[3],"type":["data.frame"],"align":["right"]},{"label":["text"],"name":[4],"type":["data.frame"],"align":["right"]},{"label":["extension"],"name":[5],"type":["list"],"align":["right"]},{"label":["identifier"],"name":[6],"type":["list"],"align":["right"]},{"label":["name"],"name":[7],"type":["list"],"align":["right"]},{"label":["telecom"],"name":[8],"type":["list"],"align":["right"]},{"label":["gender"],"name":[9],"type":["chr"],"align":["left"]},{"label":["birthDate"],"name":[10],"type":["chr"],"align":["left"]},{"label":["address"],"name":[11],"type":["list"],"align":["right"]},{"label":["maritalStatus"],"name":[12],"type":["data.frame"],"align":["right"]},{"label":["multipleBirthBoolean"],"name":[13],"type":["lgl"],"align":["right"]},{"label":["communication"],"name":[14],"type":["list"],"align":["right"]},{"label":["deceasedDateTime"],"name":[15],"type":["chr"],"align":["left"]},{"label":["multipleBirthInteger"],"name":[16],"type":["int"],"align":["right"]}],"data":[{"1":"Patient","2":"001cb1e6-60b9-411a-8a8c-aa622a74fcda","3":"<data.frame [1 × 3]>","4":"<data.frame [1 × 2]>","5":"<data.frame [9 × 7]>","6":"<data.frame [3 × 3]>","7":"<data.frame [2 × 4]>","8":"<data.frame [1 × 3]>","9":"female","10":"1989-04-03","11":"<data.frame [1 × 6]>","12":"<data.frame [1 × 2]>","13":"FALSE","14":"<data.frame [1 × 1]>","15":"NA","16":"NA","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10],"total":[16]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5maXJzdF9wYXRpZW50IDwtIHBhdGllbnRzX2RmWzEsIF1cbiNleGNsdWRlIHBob3RvXG5oZWFkKGZpcnN0X3BhdGllbnRbLC0xNF0pXG5gYGAifQ== -->
+<pre class="r"><code>
+first_patient &lt;- patients_df[1, ]
+#exclude photo
+head(first_patient[,-14])</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlyc3RfcGF0aWVudF9kZiA8LSB0aWJibGUoXG5uYW1lID0gZmlyc3RfcGF0aWVudCRuYW1lW1sxXV0kZmFtaWx5W2ZpcnN0X3BhdGllbnQkbmFtZVtbMV1dJHVzZSA9PSBcIm9mZmljaWFsXCJdLFxuaG9tZV9waG9uZSA9IGZpcnN0X3BhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW2ZpcnN0X3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSBcImhvbWVcIl0sXG5nZW5kZXIgPSBmaXJzdF9wYXRpZW50JGdlbmRlcixcbmJpcnRoRGF0ZSA9IGFzLkRhdGUoZmlyc3RfcGF0aWVudCRiaXJ0aERhdGUpLFxuY2l0eSA9IGZpcnN0X3BhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHlcbilcbmZpcnN0X3BhdGllbnRfZGZcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlyc3RfcGF0aWVudF9kZiA8LSB0aWJibGUoXG5uYW1lID0gZmlyc3RfcGF0aWVudCRuYW1lW1sxXV0kZmFtaWx5W2ZpcnN0X3BhdGllbnQkbmFtZVtbMV1dJHVzZSA9PSBcIm9mZmljaWFsXCJdLFxuaG9tZV9waG9uZSA9IGZpcnN0X3BhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW2ZpcnN0X3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSBcImhvbWVcIl0sXG5nZW5kZXIgPSBmaXJzdF9wYXRpZW50JGdlbmRlcixcbmJpcnRoRGF0ZSA9IGFzLkRhdGUoZmlyc3RfcGF0aWVudCRiaXJ0aERhdGUpLFxuY2l0eSA9IGZpcnN0X3BhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHlcbilcbmZpcnN0X3BhdGllbnRfZGZcblxuYGBgIn0= -->
 <pre class="r"><code>first_patient_df &lt;- tibble(
 name = first_patient$name[[1]]$family[first_patient$name[[1]]$use == &quot;official&quot;],
 home_phone = first_patient$telecom[[1]]$value[first_patient$telecom[[1]]$use == &quot;home&quot;],
@@ -367,45 +324,15 @@ gender = first_patient$gender,
 birthDate = as.Date(first_patient$birthDate),
 city = first_patient$address[[1]]$city
 )
-first_patient_df</code></pre>
+first_patient_df
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NSwibnJvdyI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVJQVS9ETUJCMVBpR1JXcEQ0QTR3d0pFTklxYktCMUkyTnFSdHlFamV4Y096SWNRUnMvQy8rVzhzNXFWRnJjVkxpMDN0MzkzelByNXR0Rm05amhKQ0xQTjlGcmdjcG5BZzV5RWVSUGo4UjhtNGdDZUM3UGlHaWw3RnZNY3Z6d2lLV2QxbFIzTit1MTNueXVNcFdGaHZ1U0ljWmdhRkxqVDc5d1B3cHpsU0RpdUZoc0ZyOURWYlFpUFlXZnZsY1V0NG93ZWNoN3NIaTR4b3JuTzRrN29ndHd3RXpNb0dSMGFCcGJVVkgzdnBXY0lPRURlRTFrY2FFa2tyVlR2YzZObGRVZlZrcWtSUWZxVkZhYUsrLzRYZUFtSmM1Szc0UXZhS0NRNm43bit1T3RJQ3JrZXZSZFZLMUkzOVBIdlNsSjNxT3hURjNUdkpnbHZTTVQyYnhrUENHL2kwYU1Gd1NadDRVVnBnMlNIdEp1VEx1QURxa1NpaHM2dUpLTUlQTUQ3WC9CVm9CRnZwakFnQUEifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["home_phone"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["birthDate"],"name":[4],"type":["date"],"align":["right"]},{"label":["city"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Kuphal449","2":"(299) 774-6525","3":"female","4":"1989-04-03","5":"Abington"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>create a function to pull this dat for each patient into one dataframe</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NSwibnJvdyI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVJQVS9ETUJCMVBpR1JXcEQ0QTR3d0pFT1VVbVVEcVJ0YnAyN0lTZHpFd3JFanh4R3c4Yi80YnkzbnBFYXR4VW1KVCsvZDNmTTliemU3TE43RkNDRVhlYjZMWEE5U09CRnlrSThpZlg0aTVOMUJFc0IzZTBaRXIyUGZZcGJuaFVVc0g3S2llTHhmci9Qa2FaV3RMRGJja3c0ekFrT1hHbjMrZ2ZsVFhLZ0dGY1BEWUxYNkc2eWdFUjBzL1BxbHBMeFJnczlEM0tQRnh6VldPTjFMM0JGYmhnTm1aQUlqbzBIVDJvcU92UFd0NEFZSkc4SnJJbzBKSlpXcW5lNTFhcTZvK3JKVUlpaytVcU8wMEY1L3crOElNUzl6VVh3bGVrVUZoMUwzUDljZGFRRTNJOWVqNjZScVIvNmU1UHJTRXozSDRwUTdaM2t3UzNyR0o3TjRTSGhEL3hZTkdDNEpNMjhLSzB3YnBMMmtYQmwzQUIxU0pSUTJkWEVsbUVIbWh6cjhBdlhwL1FsakFnQUEifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["home_phone"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["birthDate"],"name":[4],"type":["date"],"align":["right"]},{"label":["city"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Kuphal449","2":"(299) 774-6525","3":"female","4":"1989-04-03","5":"Abington"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Apply this function to our dataset</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NSwibnJvdyI6NTB9LCJyZGYiOiJINHNJQUFBQUFBQUFBN1ZZelc4alNSVTN5U1RPMXd6TXpLN0UwUmVraEZXMXVyNnJicE5NeUVTYkQwR0NsQVVrVU1ldXVCdDN1cVB1OWlTK0lJU0VrT0FFTi82Q1BZRVFTT3dCZ2JLN0NNMHd6TWNpL2dKT0NBa09TTUJ0dzJ1WHEyeUhIV21Cd1pKVFhlKzllaCsvK3IxeWRRNDIzeUpMYnkwMUdvMlp4dXlObWNiTUxEekMyR2g4b25HanNWaVBGNDNHN0YxNG1JUHZwK0JMUm9yRm5mNVpIS1dNYVNmWVRhcktwSXFGSThIU1hwNUZjWlR4a0kwazh6djlZNktFMHgrZW1heHRDaWJkaXNVRGMzcG1Va21jejZXZC9zTW9UVXJzRnkyOGFZcU9VZHluc1JkMXUwbXVxZkpSMncvU1FaWXBTcDNrZmw3MFRESEExTWZaTlhGbUNpMmQxOFh0cUhob0JrcjdZbzZTTXU4TlNPaml6Qi9rNTJaYzYyR1Y5MHlwcEJNME42TjJMUDN5NVYzVEw5dHh6MUFtUjZLYk8zbVdRM0ZsTDJFKzJjWHQzSFJOSVFSL21lT0Y3VUZVVmRUbnNiQ2ZtQ3cvOTNpc2JFYjlibXlLYWlESDVYM1puS1pSandpUHdHRmwrc2VBTk1adTJUcE1zNmlLQjFJNTJlSldVb0tuY2MwcmIwWmxMNjh6cHRnbDJEeUtrOHA0UDgyOVBDNFlkZHJsdmFScXh5Wk5GWitJWFppa0hYUHBpcDdmVGJLTzhpelpBVFZnUUwxaytYNmVaZUJqZ0tVTHM3eWVkVXhSNWhuRjN1OVJ2dzI3V2tuaDkyQzlEeVZ5RjJibEtFbDdTUWFMSnJiMU9yeExoKzM0Tk9sVVk5WXVINWhCbHFlZFVvK0p1bU5NbW1SZHpsMCswMFJlMkFQMkpKbjJld0lGbEVrbnlZeWdUdGJjNm1jOXhwaGZraGRSb1VQSGpxVUhlZDQ1VHpJRzRFLzMyYTFWb3ZWYVMwcUdCQ2NPNkJWS1dRRGVBNnF3ODNsYll4VVFUb09RTU42NmtNcEJ0Y0s1UkVRUXhKZ0g2eFpHV2tuRWxVQ2g4cnQ3aHhFZVNDd0NTYWxzWFdqcE4rM3VLc2R5clNYQUU4YVV0QzVDU1gyR2tqUElFRXVrdU0vbUxrYUVFb1JER0hrSUM0aGZjRWZRRVBGUUlTYTFhRjBvak1OeGZBSWxzSUFUR2JZdTRLK0wvenBHREdLSGZKZ3p1T1BBT2xmTWJTQnhnS1VLS0dPMFhpWjhKTVlRUUlTb2tBenFDYkhmSTRKQlF6aUNUWFdiOE5xcURNTzFGbVVjQWZYQW5vMmI0eldNRkNOSWE0MmsxS0NqMHA4ZVVDcHNEY0tLSTZZVTRNWThtNFlvaEVqV1NBQmhZSm4yRmExaVN0ZGFYR29rd25xVkRLbDNDZUVrNTBoUUR0dFRLeFh6YlFsYlI1VkdHc05DNlVuMytxcFFrSHdOSyt3L29DQkMrRGdjdEFxRFVQQ0FpRG9Kd2JHRGJnVzJMS0JhQnlUVWVJdzFWaFFKekFFaEF2WWFjMDhSaUk0RlE3aW1GQkhTY3dDczExcFlVNlJDeVR5Z25PQzFGc0VoMHRDNVFCck1uSi9iT0F3RHpuUWdDTmFBQzNYbDNRVTBoc1ZSaW9FRGtnczJFYnRXTUM0UUhPYkt4NllLWW9lVUFqVkQ3NS94RUZIT1VBaThBZno0R0hkQWI2MmxtRVljNkE1MHdjSVRjQVZLQ3JTbUFUU2RaeGRuT0JCYVFtT0VrS2xXbnVLTVNDZ0JPb1lxWUtUUVVLMVRFY29ERFl6RWpLbldCVlphZWNRcGJDeFJJWENNRUorVHBnUnlBazVLSm9iTlFzYVZFQ0F4VXd3cHdnQ1FVUHRrQlRBYmZqc1ExajR3UU1URG10VVUrb1F6RHhIOHlFTDNBckpjaFJOSVVHaGNBbDZJMExybXUvRE9iek9nTzlNaDhJK0oralRSRSt3Z0V0WHREdWNYNUlxRm9uSWNuZ0EzR1pRbnRHQVRVZ0ZmcWVyeTFMVVRidjdFbkVhcCtjalpqWmM4djl6cTQycittNmoveS9QSGpmZXE3Zjd6M1A0ZjFiKzZqRjZWcGpGN3ErYmd2Vi9BQlJjKzk5N1pzdU5QdmowY0x4Ky8vYzNoL04zdkRNZkxEejV6YnpqdmY5N3FIejIzK21mZnN2b25iOWoxUC8rRzFUOTViT1cvbmJQeVg5KzA5dTk4eWVwLzhHa3IvOW5mN1B5RDk2Mzk3N3ZXN25kL3RlUHpodFUvdldudEgvL1IyajNhc1BQdi9zbnFYM3psbm8zN1ZidnV2WC9ZOGZLbjF2NzlrZjN6WDluNTA0VlJYZnUycmlkWFZ2L2VINnkvSC8zWnpyKy9hY2VuczNaODlIZnI5OFhKcFIzZkdJNlhQLzY2WGZlYkg0Nzh2bTN6ZWZGUE8zLzNlM2I4NVYrc24yZTcxdjd5czZQNkxtMmgwNjhmYyswMEtzdUdQVENjOE1abVZNRUdOajVzVEI4a0MrdkhjRXVyOHN6ZDluYk54WlNndVc5TUo0NU8zYVZycTRoT3dXQkM4aUROKzIxVFZxWndQdmFpckR4SlROcHhQZzVNQkZlNzd2Z2lsMVZSdCsvSTFid1BOOFZ4eFBrdjlKT3NQWENKNzhLTGlkUHN3Z3RGbXJyWmhpbGdvYXQ2dllwenA3cXpueGRWM0ZxdnF0UWM1MFVPMTMwWGU2UEkyNzF4c09YRHN3SXltOHgyOFl2bXZGY2U5NHVCencrdTU2V0pQaUtqcFNOSU5aNHNmbjV6RXE3cFdwcEg1bmpDOU4rUm05L0l5d25vajZLMEd2dWFqSHROTmI4ZlZVbTc1d3JZemxONEFaeDJkSmI3Wm00Q091ZHdkM2JtOTZQVDR5THBkSDNyYi9jNzVRUUJwcXdYdHFMME5POVhEdERtNFRuc3RnY0h5cyt5cEhURzIwQ1dkQ0tSRFFPTHM4b0JBQzhCWlR5Ri9XRnNUaVlGMDRoY3crZHpEMDFoS3VkdGVkK2N0elpNNXlRdk91UENDek9HcVFtdlJQbERqN2JQWnRnL00xZlhXbWFwRTFWUmNBSjhOOWM3TEFPWjY3QTV0ejIxMEMyTjgxUHp0Yk00enp5bVhWTy9qcmt5anhQZzU3QWxSNHZiU1RXNEZtV3h5TThERjZrK3lXYnEwK0RxNnVxWjdlTXA0MlorVmlYd0NnVldrLzk1OFArU0tLNEpQdG5QYXRjZDFJN2hKUXZwT3VtaDJuNXVqcDdKeFBPY0RUbnJjSEtGejV1c20vaEM1OUxvMkxnK3ZBVWxEQ3NJNmk3ejJ3N1NNcWp5S25KMlMyMTRaUjVKN0JuMTRiOEFoczhDazJjUkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["home_phone"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["birthDate"],"name":[4],"type":["date"],"align":["right"]},{"label":["city"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Kuphal449","2":"(299) 774-6525","3":"female","4":"1989-04-03","5":"Abington"},{"1":"Littel840","2":"334.636.3814","3":"female","4":"1986-04-25","5":"Lexington"},{"1":"Monahan504","2":"918.253.0245 x783","3":"male","4":"1981-07-31","5":"Needham"},{"1":"Kub286","2":"557-262-4469","3":"male","4":"1934-01-15","5":"Framingham"},{"1":"Spencer470","2":"1-987-586-0815","3":"female","4":"1994-07-29","5":"Gloucester"},{"1":"Rempel729","2":"425.716.7337 x9778","3":"male","4":"1921-12-07","5":"Mansfield"},{"1":"Kuvalis186","2":"(517) 657-1132 x073","3":"female","4":"1970-12-08","5":"Reading"},{"1":"Jerde852","2":"(754) 717-8514","3":"male","4":"1935-03-23","5":"Montague"},{"1":"Maggio938","2":"1-232-101-2502 x273","3":"female","4":"2012-10-08","5":"Clinton"},{"1":"McGlynn833","2":"630-508-4796 x8110","3":"female","4":"1931-12-02","5":"Quincy"},{"1":"Corkery130","2":"422.254.5270 x5278","3":"female","4":"1985-10-07","5":"Lynn"},{"1":"Lehner976","2":"1-457-057-5862 x54359","3":"male","4":"1931-01-19","5":"Lowell"},{"1":"Harvey899","2":"781.178.3443 x526","3":"male","4":"1933-07-12","5":"Berlin"},{"1":"Wisoky202","2":"644-381-3674 x9016","3":"male","4":"1998-02-10","5":"Athol"},{"1":"Rowe49","2":"214-325-5517","3":"male","4":"1986-05-14","5":"North Attleborough"},{"1":"Stokes879","2":"(700) 345-1714 x4781","3":"male","4":"1966-10-31","5":"Brockton"},{"1":"Dach799","2":"1-842-999-7794 x3776","3":"male","4":"1983-12-25","5":"Springfield"},{"1":"Leuschke347","2":"1-652-185-4887 x440","3":"male","4":"1920-03-14","5":"Tewksbury"},{"1":"Konopelski438","2":"1-230-732-1286 x398","3":"female","4":"1918-05-28","5":"Chelsea"},{"1":"Hoeger665","2":"(133) 579-6087 x70376","3":"female","4":"2010-07-23","5":"Lynn"},{"1":"Stokes879","2":"1-755-635-0887 x8402","3":"male","4":"2013-06-16","5":"Winchester"},{"1":"Hyatt302","2":"1-389-919-6796","3":"female","4":"1929-04-12","5":"Dedham"},{"1":"Nienow86","2":"(680) 508-0243 x60000","3":"female","4":"2006-04-15","5":"Quincy"},{"1":"Daugherty730","2":"980.065.2686 x6519","3":"male","4":"1935-12-31","5":"Webster"},{"1":"Zemlak263","2":"851.399.2091","3":"female","4":"1972-05-11","5":"Gloucester"},{"1":"Steuber411","2":"1-183-615-3226 x91515","3":"female","4":"1924-02-23","5":"Boston"},{"1":"Abernathy781","2":"1-164-157-2267","3":"male","4":"1931-08-21","5":"Waltham"},{"1":"Fisher202","2":"(615) 193-8074","3":"male","4":"1996-08-01","5":"Lynn"},{"1":"Jaskolski315","2":"(521) 210-9313 x0145","3":"male","4":"1993-05-29","5":"Waltham"},{"1":"White11","2":"100.549.6219 x332","3":"male","4":"1943-01-03","5":"Natick"},{"1":"Mohr435","2":"608-919-3310 x75645","3":"female","4":"2014-07-02","5":"Holliston"},{"1":"Mitchell853","2":"1-919-456-1308","3":"male","4":"1929-04-21","5":"Walpole"},{"1":"Streich578","2":"(385) 033-1105","3":"male","4":"1921-06-26","5":"Norwood"},{"1":"Lind80","2":"450-354-0457 x858","3":"male","4":"2009-03-31","5":"Cambridge"},{"1":"Kreiger380","2":"(389) 849-5425 x51610","3":"male","4":"1996-05-24","5":"Hudson"},{"1":"Connelly171","2":"267.993.2999","3":"male","4":"1959-07-09","5":"Norwood"},{"1":"Anderson313","2":"541.697.7109 x984","3":"male","4":"1973-01-10","5":"Falmouth"},{"1":"Wuckert769","2":"427.545.7382 x69521","3":"male","4":"2010-09-02","5":"Swansea"},{"1":"Auer458","2":"235.978.1448 x18989","3":"male","4":"2004-12-27","5":"Dennis"},{"1":"Wilkinson899","2":"355-280-1722","3":"male","4":"2015-12-26","5":"Hamilton"},{"1":"Stokes879","2":"(932) 814-7462 x27205","3":"male","4":"2015-05-04","5":"Belmont"},{"1":"Schmidt840","2":"244-484-8240 x090","3":"male","4":"1959-05-06","5":"Marshfield"},{"1":"Reynolds986","2":"681-665-1921","3":"female","4":"1938-04-28","5":"Sheffield"},{"1":"Keeling551","2":"1-505-553-5854","3":"male","4":"1920-07-05","5":"Boston"},{"1":"Kub286","2":"(470) 608-5808","3":"female","4":"1922-06-08","5":"Boston"},{"1":"Marvin96","2":"(334) 281-2699 x47690","3":"male","4":"1945-05-29","5":"Everett"},{"1":"Considine636","2":"442-490-0846 x789","3":"female","4":"1949-01-10","5":"New Bedford"},{"1":"Funk444","2":"1-127-717-9072 x16837","3":"male","4":"2012-06-21","5":"Wareham"},{"1":"Morar907","2":"1-289-480-6964","3":"female","4":"1947-05-06","5":"Andover"},{"1":"Goodwin402","2":"1-261-278-7468","3":"male","4":"1928-04-19","5":"Belmont"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[50]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Bring it all together</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpe1xuICAgICAgdGliYmxlKFxuICAgICAgICAgIG5hbWUgPSBwYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbcGF0aWVudCRuYW1lW1sxXV0kdXNlID09IFwib2ZmaWNpYWxcIl0sXG4gICAgICAgICAgaG9tZV9waG9uZSA9IHBhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSBcImhvbWVcIl0sXG4gICAgICAgICAgZ2VuZGVyID0gcGF0aWVudCRnZW5kZXIsXG4gICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksXG4gICAgICAgICAgY2l0eSA9IHBhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHlcbiAgICApXG59XG5jbGllbnQgPSBmaGlyQ2xpZW50JG5ldyhcImh0dHA6Ly90ZXN0LmZoaXIub3JnL3IzXCIpXG5wYXRpZW50cyA9IGNsaWVudCRyZWFkKGxvY2F0aW9uID0gXCJQYXRpZW50XCIsIHN1bW1hcnlUeXBlID0gXCJqc29uXCIpXG5wYXRpZW50c19kZiA8LSBwYXRpZW50cyRlbnRyeVtbMV1dJHJlc291cmNlXG5ucm93cyA8LSBucm93KHBhdGllbnRzX2RmKVxubWFwX2RmcihzZXFfbGVuKG5yb3dzKSxcbiAgICAgICAgZnVuY3Rpb24oeCwgcGF0aWVudHMpe1xuICAgICAgICBiYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNbeCwgXSlcbiAgICAgICAgfVxuICAgICAgICAsIHBhdGllbnRzID0gcGF0aWVudHNfZGYpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpe1xuICAgICAgdGliYmxlKFxuICAgICAgICAgIG5hbWUgPSBwYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbcGF0aWVudCRuYW1lW1sxXV0kdXNlID09IFwib2ZmaWNpYWxcIl0sXG4gICAgICAgICAgaG9tZV9waG9uZSA9IHBhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSBcImhvbWVcIl0sXG4gICAgICAgICAgZ2VuZGVyID0gcGF0aWVudCRnZW5kZXIsXG4gICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksXG4gICAgICAgICAgY2l0eSA9IHBhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHlcbiAgICApXG5cbn1cbmJhc2ljX3BhdGllbnRfZGV0YWlscyhmaXJzdF9wYXRpZW50KVxuYGBgIn0= -->
 <pre class="r"><code>basic_patient_details &lt;- function(patient){
       tibble(
           name = patient$name[[1]]$family[patient$name[[1]]$use == &quot;official&quot;],
@@ -414,29 +341,68 @@ first_patient_df</code></pre>
           birthDate = as.Date(patient$birthDate),
           city = patient$address[[1]]$city
     )
+
 }
-client = fhirClient$new(&quot;http://test.fhir.org/r3&quot;)
-patients = client$read(location = &quot;Patient&quot;, summaryType = &quot;json&quot;)
-patients_df &lt;- patients$entry[[1]]$resource
-nrows &lt;- nrow(patients_df)
+basic_patient_details(first_patient)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Apply this function to our dataset</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnJvd3MgPC0gbnJvdyhwYXRpZW50c19kZilcblxuXG5iYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNfZGZbMiwgXSlcblxubWFwX2RmcihzZXFfbGVuKG5yb3dzKSxcbiAgICAgICAgZnVuY3Rpb24oeCwgcGF0aWVudHMpe1xuICAgICAgICBiYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNbeCwgXSlcbiAgICAgICAgfVxuICAgICAgICAsIHBhdGllbnRzID0gcGF0aWVudHNfZGYpXG5gYGAifQ== -->
+<pre class="r"><code>nrows &lt;- nrow(patients_df)
+
+
+basic_patient_details(patients_df[2, ])
+
 map_dfr(seq_len(nrows),
         function(x, patients){
         basic_patient_details(patients[x, ])
         }
         , patients = patients_df)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NSwibnJvdyI6NTB9LCJyZGYiOiJINHNJQUFBQUFBQUFBN1ZZelc4alNSVTN5U1RPMXd6TXpLN0UwUmVraEZXMXVyNnJicE5NeUVTYkQwR0NsQVVrVU1ldXVCdDN1cVB1OWlTK0lJU0VrT0FFTi82Q1BZRVFTT3dCZ2JLN0NNMHd6TWNpL2dKT0NBa09TTUJ0dzJ1WHEyeUhIV21Cd1pKVFhlKzllaCsvK3IxeWRRNDIzeUpMYnkwMUdvMlp4dXlObWNiTUxEekMyR2g4b25HanNWaVBGNDNHN0YxNG1JUHZwK0JMUm9yRm5mNVpIS1dNYVNmWVRhcktwSXFGSThIU1hwNUZjWlR4a0kwazh6djlZNktFMHgrZW1heHRDaWJkaXNVRGMzcG1Va21jejZXZC9zTW9UVXJzRnkyOGFZcU9VZHluc1JkMXUwbXVxZkpSMncvU1FaWXBTcDNrZmw3MFRESEExTWZaTlhGbUNpMmQxOFh0cUhob0JrcjdZbzZTTXU4TlNPaml6Qi9rNTJaYzYyR1Y5MHlwcEJNME42TjJMUDN5NVYzVEw5dHh6MUFtUjZLYk8zbVdRM0ZsTDJFKzJjWHQzSFJOSVFSL21lT0Y3VUZVVmRUbnNiQ2ZtQ3cvOTNpc2JFYjlibXlLYWlESDVYM1puS1pSandpUHdHRmwrc2VBTk1adTJUcE1zNmlLQjFJNTJlSldVb0tuY2MwcmIwWmxMNjh6cHRnbDJEeUtrOHA0UDgyOVBDNFlkZHJsdmFScXh5Wk5GWitJWFppa0hYUHBpcDdmVGJLTzhpelpBVFZnUUwxaytYNmVaZUJqZ0tVTHM3eWVkVXhSNWhuRjN1OVJ2dzI3V2tuaDkyQzlEeVZ5RjJibEtFbDdTUWFMSnJiMU9yeExoKzM0Tk9sVVk5WXVINWhCbHFlZFVvK0p1bU5NbW1SZHpsMCswMFJlMkFQMkpKbjJld0lGbEVrbnlZeWdUdGJjNm1jOXhwaGZraGRSb1VQSGpxVUhlZDQ1VHpJRzRFLzMyYTFWb3ZWYVMwcUdCQ2NPNkJWS1dRRGVBNnF3ODNsYll4VVFUb09RTU42NmtNcEJ0Y0s1UkVRUXhKZ0g2eFpHV2tuRWxVQ2g4cnQ3aHhFZVNDd0NTYWxzWFdqcE4rM3VLc2R5clNYQUU4YVV0QzVDU1gyR2tqUElFRXVrdU0vbUxrYUVFb1JER0hrSUM0aGZjRWZRRVBGUUlTYTFhRjBvak1OeGZBSWxzSUFUR2JZdTRLK0wvenBHREdLSGZKZ3p1T1BBT2xmTWJTQnhnS1VLS0dPMFhpWjhKTVlRUUlTb2tBenFDYkhmSTRKQlF6aUNUWFdiOE5xcURNTzFGbVVjQWZYQW5vMmI0eldNRkNOSWE0MmsxS0NqMHA4ZVVDcHNEY0tLSTZZVTRNWThtNFlvaEVqV1NBQmhZSm4yRmExaVN0ZGFYR29rd25xVkRLbDNDZUVrNTBoUUR0dFRLeFh6YlFsYlI1VkdHc05DNlVuMytxcFFrSHdOSyt3L29DQkMrRGdjdEFxRFVQQ0FpRG9Kd2JHRGJnVzJMS0JhQnlUVWVJdzFWaFFKekFFaEF2WWFjMDhSaUk0RlE3aW1GQkhTY3dDczExcFlVNlJDeVR5Z25PQzFGc0VoMHRDNVFCck1uSi9iT0F3RHpuUWdDTmFBQzNYbDNRVTBoc1ZSaW9FRGtnczJFYnRXTUM0UUhPYkt4NllLWW9lVUFqVkQ3NS94RUZIT1VBaThBZno0R0hkQWI2MmxtRVljNkE1MHdjSVRjQVZLQ3JTbUFUU2RaeGRuT0JCYVFtT0VrS2xXbnVLTVNDZ0JPb1lxWUtUUVVLMVRFY29ERFl6RWpLbldCVlphZWNRcGJDeFJJWENNRUorVHBnUnlBazVLSm9iTlFzYVZFQ0F4VXd3cHdnQ1FVUHRrQlRBYmZqc1ExajR3UU1URG10VVUrb1F6RHhIOHlFTDNBckpjaFJOSVVHaGNBbDZJMExybXUvRE9iek9nTzlNaDhJK0oralRSRSt3Z0V0WHREdWNYNUlxRm9uSWNuZ0EzR1pRbnRHQVRVZ0ZmcWVyeTFMVVRidjdFbkVhcCtjalpqWmM4djl6cTQycittNmoveS9QSGpmZXE3Zjd6M1A0ZjFiKzZqRjZWcGpGN3ErYmd2Vi9BQlJjKzk5N1pzdU5QdmowY0x4Ky8vYzNoL04zdkRNZkxEejV6YnpqdmY5N3FIejIzK21mZnN2b25iOWoxUC8rRzFUOTViT1cvbmJQeVg5KzA5dTk4eWVwLzhHa3IvOW5mN1B5RDk2Mzk3N3ZXN25kL3RlUHpodFUvdldudEgvL1IyajNhc1BQdi9zbnFYM3psbm8zN1ZidnV2WC9ZOGZLbjF2NzlrZjN6WDluNTA0VlJYZnUycmlkWFZ2L2VINnkvSC8zWnpyKy9hY2VuczNaODlIZnI5OFhKcFIzZkdJNlhQLzY2WGZlYkg0Nzh2bTN6ZWZGUE8zLzNlM2I4NVYrc24yZTcxdjd5czZQNkxtMmgwNjhmYyswMEtzdUdQVENjOE1abVZNRUdOajVzVEI4a0MrdkhjRXVyOHN6ZDluYk54WlNndVc5TUo0NU8zYVZycTRoT3dXQkM4aUROKzIxVFZxWndQdmFpckR4SlROcHhQZzVNQkZlNzd2Z2lsMVZSdCsvSTFid1BOOFZ4eFBrdjlKT3NQWENKNzhLTGlkUHN3Z3RGbXJyWmhpbGdvYXQ2dllwenA3cXpueGRWM0ZxdnF0UWM1MFVPMTMwWGU2UEkyNzF4c09YRHN3SXltOHgyOFl2bXZGY2U5NHVCencrdTU2V0pQaUtqcFNOSU5aNHNmbjV6RXE3cFdwcEg1bmpDOU4rUm05L0l5d25vajZLMEd2dWFqSHROTmI4ZlZVbTc1d3JZemxONEFaeDJkSmI3Wm00Q091ZHdkM2JtOTZQVDR5THBkSDNyYi9jNzVRUUJwcXdYdHFMME5POVhEdERtNFRuc3RnY0h5cyt5cEhURzIwQ1dkQ0tSRFFPTHM4b0JBQzhCWlR5Ri9XRnNUaVlGMDRoY3crZHpEMDFoS3VkdGVkK2N0elpNNXlRdk91UENDek9HcVFtdlJQbERqN2JQWnRnL00xZlhXbWFwRTFWUmNBSjhOOWM3TEFPWjY3QTV0ejIxMEMyTjgxUHp0Yk00enp5bVhWTy9qcmt5anhQZzU3QWxSNHZiU1RXNEZtV3h5TThERjZrK3lXYnEwK0RxNnVxWjdlTXA0MlorVmlYd0NnVldrLzk1OFArU0tLNEpQdG5QYXRjZDFJN2hKUXV4T3VtaDJuNXVqcDdKeFBPY0RUbnJjSEtGejV1c20vaEM1OUxvMkxnK3ZBVWxEQ3NJNmk3ejJ3N1NNcWp5S25KMlMyMTRaUjVKN0JuMTRiOEEvMzVHQ21jUkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["home_phone"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["birthDate"],"name":[4],"type":["date"],"align":["right"]},{"label":["city"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Kuphal449","2":"(299) 774-6525","3":"female","4":"1989-04-03","5":"Abington"},{"1":"Littel840","2":"334.636.3814","3":"female","4":"1986-04-25","5":"Lexington"},{"1":"Monahan504","2":"918.253.0245 x783","3":"male","4":"1981-07-31","5":"Needham"},{"1":"Kub286","2":"557-262-4469","3":"male","4":"1934-01-15","5":"Framingham"},{"1":"Spencer470","2":"1-987-586-0815","3":"female","4":"1994-07-29","5":"Gloucester"},{"1":"Rempel729","2":"425.716.7337 x9778","3":"male","4":"1921-12-07","5":"Mansfield"},{"1":"Kuvalis186","2":"(517) 657-1132 x073","3":"female","4":"1970-12-08","5":"Reading"},{"1":"Jerde852","2":"(754) 717-8514","3":"male","4":"1935-03-23","5":"Montague"},{"1":"Maggio938","2":"1-232-101-2502 x273","3":"female","4":"2012-10-08","5":"Clinton"},{"1":"McGlynn833","2":"630-508-4796 x8110","3":"female","4":"1931-12-02","5":"Quincy"},{"1":"Corkery130","2":"422.254.5270 x5278","3":"female","4":"1985-10-07","5":"Lynn"},{"1":"Lehner976","2":"1-457-057-5862 x54359","3":"male","4":"1931-01-19","5":"Lowell"},{"1":"Harvey899","2":"781.178.3443 x526","3":"male","4":"1933-07-12","5":"Berlin"},{"1":"Wisoky202","2":"644-381-3674 x9016","3":"male","4":"1998-02-10","5":"Athol"},{"1":"Rowe49","2":"214-325-5517","3":"male","4":"1986-05-14","5":"North Attleborough"},{"1":"Stokes879","2":"(700) 345-1714 x4781","3":"male","4":"1966-10-31","5":"Brockton"},{"1":"Dach799","2":"1-842-999-7794 x3776","3":"male","4":"1983-12-25","5":"Springfield"},{"1":"Leuschke347","2":"1-652-185-4887 x440","3":"male","4":"1920-03-14","5":"Tewksbury"},{"1":"Konopelski438","2":"1-230-732-1286 x398","3":"female","4":"1918-05-28","5":"Chelsea"},{"1":"Hoeger665","2":"(133) 579-6087 x70376","3":"female","4":"2010-07-23","5":"Lynn"},{"1":"Stokes879","2":"1-755-635-0887 x8402","3":"male","4":"2013-06-16","5":"Winchester"},{"1":"Hyatt302","2":"1-389-919-6796","3":"female","4":"1929-04-12","5":"Dedham"},{"1":"Nienow86","2":"(680) 508-0243 x60000","3":"female","4":"2006-04-15","5":"Quincy"},{"1":"Daugherty730","2":"980.065.2686 x6519","3":"male","4":"1935-12-31","5":"Webster"},{"1":"Zemlak263","2":"851.399.2091","3":"female","4":"1972-05-11","5":"Gloucester"},{"1":"Steuber411","2":"1-183-615-3226 x91515","3":"female","4":"1924-02-23","5":"Boston"},{"1":"Abernathy781","2":"1-164-157-2267","3":"male","4":"1931-08-21","5":"Waltham"},{"1":"Fisher202","2":"(615) 193-8074","3":"male","4":"1996-08-01","5":"Lynn"},{"1":"Jaskolski315","2":"(521) 210-9313 x0145","3":"male","4":"1993-05-29","5":"Waltham"},{"1":"White11","2":"100.549.6219 x332","3":"male","4":"1943-01-03","5":"Natick"},{"1":"Mohr435","2":"608-919-3310 x75645","3":"female","4":"2014-07-02","5":"Holliston"},{"1":"Mitchell853","2":"1-919-456-1308","3":"male","4":"1929-04-21","5":"Walpole"},{"1":"Streich578","2":"(385) 033-1105","3":"male","4":"1921-06-26","5":"Norwood"},{"1":"Lind80","2":"450-354-0457 x858","3":"male","4":"2009-03-31","5":"Cambridge"},{"1":"Kreiger380","2":"(389) 849-5425 x51610","3":"male","4":"1996-05-24","5":"Hudson"},{"1":"Connelly171","2":"267.993.2999","3":"male","4":"1959-07-09","5":"Norwood"},{"1":"Anderson313","2":"541.697.7109 x984","3":"male","4":"1973-01-10","5":"Falmouth"},{"1":"Wuckert769","2":"427.545.7382 x69521","3":"male","4":"2010-09-02","5":"Swansea"},{"1":"Auer458","2":"235.978.1448 x18989","3":"male","4":"2004-12-27","5":"Dennis"},{"1":"Wilkinson899","2":"355-280-1722","3":"male","4":"2015-12-26","5":"Hamilton"},{"1":"Stokes879","2":"(932) 814-7462 x27205","3":"male","4":"2015-05-04","5":"Belmont"},{"1":"Schmidt840","2":"244-484-8240 x090","3":"male","4":"1959-05-06","5":"Marshfield"},{"1":"Reynolds986","2":"681-665-1921","3":"female","4":"1938-04-28","5":"Sheffield"},{"1":"Keeling551","2":"1-505-553-5854","3":"male","4":"1920-07-05","5":"Boston"},{"1":"Kub286","2":"(470) 608-5808","3":"female","4":"1922-06-08","5":"Boston"},{"1":"Marvin96","2":"(334) 281-2699 x47690","3":"male","4":"1945-05-29","5":"Everett"},{"1":"Considine636","2":"442-490-0846 x789","3":"female","4":"1949-01-10","5":"New Bedford"},{"1":"Funk444","2":"1-127-717-9072 x16837","3":"male","4":"2012-06-21","5":"Wareham"},{"1":"Morar907","2":"1-289-480-6964","3":"female","4":"1947-05-06","5":"Andover"},{"1":"Goodwin402","2":"1-261-278-7468","3":"male","4":"1928-04-19","5":"Belmont"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[50]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Bring it all together</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5cblxuYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpe1xuICAgICAgdGliYmxlKFxuICAgICAgICAgIG5hbWUgPSBwYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbcGF0aWVudCRuYW1lW1sxXV0kdXNlID09IFwib2ZmaWNpYWxcIl0sXG4gICAgICAgICAgaG9tZV9waG9uZSA9IHBhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSBcImhvbWVcIl0sXG4gICAgICAgICAgZ2VuZGVyID0gcGF0aWVudCRnZW5kZXIsXG4gICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksXG4gICAgICAgICAgY2l0eSA9IHBhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHlcbiAgICApXG5cbn1cblxuY2xpZW50ID0gZmhpckNsaWVudCRuZXcoXCJodHRwOi8vdGVzdC5maGlyLm9yZy9yM1wiKVxucGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9IFwiUGF0aWVudFwiLCBzdW1tYXJ5VHlwZSA9IFwianNvblwiKVxuXG5wYXRpZW50c19kZiA8LSBwYXRpZW50cyRlbnRyeVtbMV1dJHJlc291cmNlXG5cblxuXG5ucm93cyA8LSBucm93KHBhdGllbnRzX2RmKVxuXG5tYXBfZGZyKHNlcV9sZW4obnJvd3MpLFxuICAgICAgICBmdW5jdGlvbih4LCBwYXRpZW50cyl7XG4gICAgICAgIGJhc2ljX3BhdGllbnRfZGV0YWlscyhwYXRpZW50c1t4LCBdKVxuICAgICAgICB9XG4gICAgICAgICwgcGF0aWVudHMgPSBwYXRpZW50c19kZilcblxuYGBgIn0= -->
+<pre class="r"><code>
+
+
+basic_patient_details &lt;- function(patient){
+      tibble(
+          name = patient$name[[1]]$family[patient$name[[1]]$use == &quot;official&quot;],
+          home_phone = patient$telecom[[1]]$value[patient$telecom[[1]]$use == &quot;home&quot;],
+          gender = patient$gender,
+          birthDate = as.Date(patient$birthDate),
+          city = patient$address[[1]]$city
+    )
+
+}
+
+client = fhirClient$new(&quot;http://test.fhir.org/r3&quot;)
+patients = client$read(location = &quot;Patient&quot;, summaryType = &quot;json&quot;)
+
+patients_df &lt;- patients$entry[[1]]$resource
+
+
+
+nrows &lt;- nrow(patients_df)
+
+map_dfr(seq_len(nrows),
+        function(x, patients){
+        basic_patient_details(patients[x, ])
+        }
+        , patients = patients_df)
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBvbiBGSElSIGV4YW1wbGUiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAotLS0KSW5zdGFsbCB0aGUgUm9uRkhJUiBsaWJyYXJ5CmBgYHtyfQojIGluc3RhbGwucGFja2FnZXMoIlJvbkZISVIiKQoKbGlicmFyeShSb25GSElSKQpsaWJyYXJ5KGRwbHlyKQpsaWJyYXJ5KHB1cnJyKQpgYGAKYSB0aWR5IGRhdGEgZnJhbWUgZm9yIDUwIHBhdGllbnRzJyBiYXNpYyBkZW1vZ3JhcGhpYyBkZXRhaWxzCgpgYGB7cn0KCgoKYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpewogICAgICB0aWJibGUoCiAgICAgICAgICBuYW1lID0gcGF0aWVudCRuYW1lW1sxXV0kZmFtaWx5W3BhdGllbnQkbmFtZVtbMV1dJHVzZSA9PSAib2ZmaWNpYWwiXSwKICAgICAgICAgIGhvbWVfcGhvbmUgPSBwYXRpZW50JHRlbGVjb21bWzFdXSR2YWx1ZVtwYXRpZW50JHRlbGVjb21bWzFdXSR1c2UgPT0gImhvbWUiXSwKICAgICAgICAgIGdlbmRlciA9IHBhdGllbnQkZ2VuZGVyLAogICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksCiAgICAgICAgICBjaXR5ID0gcGF0aWVudCRhZGRyZXNzW1sxXV0kY2l0eQogICAgKQoKfQoKY2xpZW50ID0gZmhpckNsaWVudCRuZXcoImh0dHA6Ly90ZXN0LmZoaXIub3JnL3IzIikKcGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9ICJQYXRpZW50Iiwgc3VtbWFyeVR5cGUgPSAianNvbiIpCgpwYXRpZW50c19kZiA8LSBwYXRpZW50cyRlbnRyeVtbMV1dJHJlc291cmNlCgoKCm5yb3dzIDwtIG5yb3cocGF0aWVudHNfZGYpCgptYXBfZGZyKHNlcV9sZW4obnJvd3MpLAogICAgICAgIGZ1bmN0aW9uKHgsIHBhdGllbnRzKXsKICAgICAgICBiYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNbeCwgXSkKICAgICAgICB9CiAgICAgICAgLCBwYXRpZW50cyA9IHBhdGllbnRzX2RmKQoKYGBgCgoKCkNvbm5lY3QgdG8gdGhlIEZISVIgQVBJCmBgYHtyfQpjbGllbnQgPSBmaGlyQ2xpZW50JG5ldygiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMiKQpgYGAKQXNrIGZvciBhIHBhdGllbnQKCmBgYHtyfQpwYXRpZW50ID0gY2xpZW50JHJlYWQobG9jYXRpb24gPSAiUGF0aWVudC9leGFtcGxlIiwgc3VtbWFyeVR5cGUgPSAianNvbiIpCmBgYApXb3JrIHdpdGggdGhlIHBhdGllbnQncyBuYW1lIGRhdGEKYGBge3J9CnBhdGllbnRfbmFtZSA8LSBwYXRpZW50JG5hbWVbWzFdXQoKY3VycmVudF9wYXRpZW50X25hbWUgPC0gcGF0aWVudF9uYW1lW3BhdGllbnRfbmFtZSR1c2UgPT0gIm9mZmljaWFsIixdCgpwYXN0ZSgiU3VybmFtZToiLCBjdXJyZW50X3BhdGllbnRfbmFtZSRmYW1pbHkpCnBhc3RlKCJHaXZlbiBuYW1lczoiLCBjdXJyZW50X3BhdGllbnRfbmFtZSRnaXZlbikKcGFzdGUoIlBhdGllbnQgVVI6IixwYXRpZW50JGlkZW50aWZpZXJbWzFdXSR2YWx1ZVsxXSkKCgoKCgpgYGAKCgpMZXRzIGdldCBhIGJ1bmNoIG9mIHBhdGllbnRzCmBgYHtyfQpwYXRpZW50cyA9IGNsaWVudCRyZWFkKGxvY2F0aW9uID0gIlBhdGllbnQiLCBzdW1tYXJ5VHlwZSA9ICJqc29uIikKCmBgYApIT3cgbWFueSBwYXRpZW50cyBkbyBpIGhhdmUgaW4gUj8KYGBge3J9CnBhdGllbnRzJHRvdGFsCmBgYApMb29rIGF0IHRoZSBsaW5rIGkuZS4gaGVscHMgZGV0ZXJtaW5lIG9mIHRoZXJlIGlzIG1vcmUgZGF0YSB0byBzbHVycApgYGB7cn0KcGF0aWVudHMkbGlua1tbMV1dCgpgYGAKVGhlIGFjdHVhbCBwYXRpZW50IGRhdGEgc2VlbXMgdG8gYmUgaW4gYSBsaXN0IGNvbHVtbiBjYWxsZWQgImVudHJ5IgppbiBlbnRyeSBpcyBhIGRhdGFmcmFtZQpgYGB7cn0KaGVhZChwYXRpZW50cyRlbnRyeVtbMV1dJGZ1bGxVcmwpCmBgYApUaGUgYWN0dWFsIHBhdGllbnQgcmVjb3JkcyBtYXkgYmUgaW4gdGhlIGNvbHVtbiBjYWxsIHJlc291cmNlCmBgYHtyfQpwYXRpZW50c19kZiA8LSBwYXRpZW50cyRlbnRyeVtbMV1dJHJlc291cmNlCmBgYAoKZXhwbG9yZSB0aGUgcGF0aWVudF9kZgpgYGB7cn0KbmFtZXMocGF0aWVudHNfZGYpCmhlYWQocGF0aWVudHNfZGYkbmFtZSkKbWFwKHBhdGllbnRzX2RmLHR5cGVvZikKYGBgCgoKMXN0IHBhdGllbnQKYGBge3J9CgpmaXJzdF9wYXRpZW50IDwtIHBhdGllbnRzX2RmWzEsIF0KI2V4Y2x1ZGUgcGhvdG8KaGVhZChmaXJzdF9wYXRpZW50WywtMTRdKQpgYGAKCmBgYHtyfQpmaXJzdF9wYXRpZW50X2RmIDwtIHRpYmJsZSgKbmFtZSA9IGZpcnN0X3BhdGllbnQkbmFtZVtbMV1dJGZhbWlseVtmaXJzdF9wYXRpZW50JG5hbWVbWzFdXSR1c2UgPT0gIm9mZmljaWFsIl0sCmhvbWVfcGhvbmUgPSBmaXJzdF9wYXRpZW50JHRlbGVjb21bWzFdXSR2YWx1ZVtmaXJzdF9wYXRpZW50JHRlbGVjb21bWzFdXSR1c2UgPT0gImhvbWUiXSwKZ2VuZGVyID0gZmlyc3RfcGF0aWVudCRnZW5kZXIsCmJpcnRoRGF0ZSA9IGFzLkRhdGUoZmlyc3RfcGF0aWVudCRiaXJ0aERhdGUpLApjaXR5ID0gZmlyc3RfcGF0aWVudCRhZGRyZXNzW1sxXV0kY2l0eQopCmZpcnN0X3BhdGllbnRfZGYKCmBgYApjcmVhdGUgYSBmdW5jdGlvbiB0byBwdWxsIHRoaXMgZGF0IGZvciBlYWNoIHBhdGllbnQgaW50byBvbmUgZGF0YWZyYW1lCmBgYHtyfQpiYXNpY19wYXRpZW50X2RldGFpbHMgPC0gZnVuY3Rpb24ocGF0aWVudCl7CiAgICAgIHRpYmJsZSgKICAgICAgICAgIG5hbWUgPSBwYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbcGF0aWVudCRuYW1lW1sxXV0kdXNlID09ICJvZmZpY2lhbCJdLAogICAgICAgICAgaG9tZV9waG9uZSA9IHBhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSAiaG9tZSJdLAogICAgICAgICAgZ2VuZGVyID0gcGF0aWVudCRnZW5kZXIsCiAgICAgICAgICBiaXJ0aERhdGUgPSBhcy5EYXRlKHBhdGllbnQkYmlydGhEYXRlKSwKICAgICAgICAgIGNpdHkgPSBwYXRpZW50JGFkZHJlc3NbWzFdXSRjaXR5CiAgICApCgp9CmJhc2ljX3BhdGllbnRfZGV0YWlscyhmaXJzdF9wYXRpZW50KQpgYGAKCkFwcGx5IHRoaXMgZnVuY3Rpb24gdG8gb3VyIGRhdGFzZXQgCmBgYHtyfQpucm93cyA8LSBucm93KHBhdGllbnRzX2RmKQoKCmJhc2ljX3BhdGllbnRfZGV0YWlscyhwYXRpZW50c19kZlsyLCBdKQoKbWFwX2RmcihzZXFfbGVuKG5yb3dzKSwKICAgICAgICBmdW5jdGlvbih4LCBwYXRpZW50cyl7CiAgICAgICAgYmFzaWNfcGF0aWVudF9kZXRhaWxzKHBhdGllbnRzW3gsIF0pCiAgICAgICAgfQogICAgICAgICwgcGF0aWVudHMgPSBwYXRpZW50c19kZikKYGBgCgpCcmluZyBpdCBhbGwgdG9nZXRoZXIKCmBgYHtyfQoKCgpiYXNpY19wYXRpZW50X2RldGFpbHMgPC0gZnVuY3Rpb24ocGF0aWVudCl7CiAgICAgIHRpYmJsZSgKICAgICAgICAgIG5hbWUgPSBwYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbcGF0aWVudCRuYW1lW1sxXV0kdXNlID09ICJvZmZpY2lhbCJdLAogICAgICAgICAgaG9tZV9waG9uZSA9IHBhdGllbnQkdGVsZWNvbVtbMV1dJHZhbHVlW3BhdGllbnQkdGVsZWNvbVtbMV1dJHVzZSA9PSAiaG9tZSJdLAogICAgICAgICAgZ2VuZGVyID0gcGF0aWVudCRnZW5kZXIsCiAgICAgICAgICBiaXJ0aERhdGUgPSBhcy5EYXRlKHBhdGllbnQkYmlydGhEYXRlKSwKICAgICAgICAgIGNpdHkgPSBwYXRpZW50JGFkZHJlc3NbWzFdXSRjaXR5CiAgICApCgp9CgpjbGllbnQgPSBmaGlyQ2xpZW50JG5ldygiaHR0cDovL3Rlc3QuZmhpci5vcmcvcjMiKQpwYXRpZW50cyA9IGNsaWVudCRyZWFkKGxvY2F0aW9uID0gIlBhdGllbnQiLCBzdW1tYXJ5VHlwZSA9ICJqc29uIikKCnBhdGllbnRzX2RmIDwtIHBhdGllbnRzJGVudHJ5W1sxXV0kcmVzb3VyY2UKCgoKbnJvd3MgPC0gbnJvdyhwYXRpZW50c19kZikKCm1hcF9kZnIoc2VxX2xlbihucm93cyksCiAgICAgICAgZnVuY3Rpb24oeCwgcGF0aWVudHMpewogICAgICAgIGJhc2ljX3BhdGllbnRfZGV0YWlscyhwYXRpZW50c1t4LCBdKQogICAgICAgIH0KICAgICAgICAsIHBhdGllbnRzID0gcGF0aWVudHNfZGYpCgpgYGAKCgoKCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBvbiBGSElSICBleGFtcGxlIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKLS0tCkluc3RhbGwgdGhlIFJvbkZISVIgbGlicmFyeQpgYGB7cn0KIyBpbnN0YWxsLnBhY2thZ2VzKCJSb25GSElSIikKCmxpYnJhcnkoUm9uRkhJUikKbGlicmFyeShkcGx5cikKbGlicmFyeShwdXJycikKYGBgCmEgdGlkeSBkYXRhIGZyYW1lIGZvciA1MCBwYXRpZW50cycgYmFzaWMgZGVtb2dyYXBoaWMgZGV0YWlscwoKYGBge3J9CgoKCmJhc2ljX3BhdGllbnRfZGV0YWlscyA8LSBmdW5jdGlvbihwYXRpZW50KXsKICAgICAgdGliYmxlKAogICAgICAgICAgbmFtZSA9IHBhdGllbnQkbmFtZVtbMV1dJGZhbWlseVtwYXRpZW50JG5hbWVbWzFdXSR1c2UgPT0gIm9mZmljaWFsIl0sCiAgICAgICAgICBob21lX3Bob25lID0gcGF0aWVudCR0ZWxlY29tW1sxXV0kdmFsdWVbcGF0aWVudCR0ZWxlY29tW1sxXV0kdXNlID09ICJob21lIl0sCiAgICAgICAgICBnZW5kZXIgPSBwYXRpZW50JGdlbmRlciwKICAgICAgICAgIGJpcnRoRGF0ZSA9IGFzLkRhdGUocGF0aWVudCRiaXJ0aERhdGUpLAogICAgICAgICAgY2l0eSA9IHBhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHkKICAgICkKCn0KCmNsaWVudCA9IGZoaXJDbGllbnQkbmV3KCJodHRwOi8vdGVzdC5maGlyLm9yZy9yMyIpCnBhdGllbnRzID0gY2xpZW50JHJlYWQobG9jYXRpb24gPSAiUGF0aWVudCIsIHN1bW1hcnlUeXBlID0gImpzb24iKQoKcGF0aWVudHNfZGYgPC0gcGF0aWVudHMkZW50cnlbWzFdXSRyZXNvdXJjZQoKCgpucm93cyA8LSBucm93KHBhdGllbnRzX2RmKQoKbWFwX2RmcihzZXFfbGVuKG5yb3dzKSwKICAgICAgICBmdW5jdGlvbih4LCBwYXRpZW50cyl7CiAgICAgICAgYmFzaWNfcGF0aWVudF9kZXRhaWxzKHBhdGllbnRzW3gsIF0pCiAgICAgICAgfQogICAgICAgICwgcGF0aWVudHMgPSBwYXRpZW50c19kZikKCmBgYAoKCgpDb25uZWN0IHRvIHRoZSBGSElSIEFQSQpgYGB7cn0KY2xpZW50ID0gZmhpckNsaWVudCRuZXcoImh0dHA6Ly90ZXN0LmZoaXIub3JnL3IzIikKYGBgCkFzayBmb3IgYSBwYXRpZW50CgpgYGB7cn0KcGF0aWVudCA9IGNsaWVudCRyZWFkKGxvY2F0aW9uID0gIlBhdGllbnQvZXhhbXBsZSIsIHN1bW1hcnlUeXBlID0gImpzb24iKQpgYGAKV29yayB3aXRoIHRoZSBwYXRpZW50J3MgbmFtZSBkYXRhCmBgYHtyfQpwYXRpZW50X25hbWUgPC0gcGF0aWVudCRuYW1lW1sxXV0KCmN1cnJlbnRfcGF0aWVudF9uYW1lIDwtIHBhdGllbnRfbmFtZVtwYXRpZW50X25hbWUkdXNlID09ICJvZmZpY2lhbCIsXQoKcGFzdGUoIlN1cm5hbWU6IiwgY3VycmVudF9wYXRpZW50X25hbWUkZmFtaWx5KQpwYXN0ZSgiR2l2ZW4gbmFtZXM6IiwgY3VycmVudF9wYXRpZW50X25hbWUkZ2l2ZW4pCnBhc3RlKCJQYXRpZW50IFVSOiIscGF0aWVudCRpZGVudGlmaWVyW1sxXV0kdmFsdWVbMV0pCgoKCgoKYGBgCgoKTGV0cyBnZXQgYSBidW5jaCBvZiBwYXRpZW50cwpgYGB7cn0KcGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9ICJQYXRpZW50Iiwgc3VtbWFyeVR5cGUgPSAianNvbiIpCgpgYGAKSE93IG1hbnkgcGF0aWVudHMgZG8gaSBoYXZlIGluIFI/CmBgYHtyfQpwYXRpZW50cyR0b3RhbApgYGAKTG9vayBhdCB0aGUgbGluayBpLmUuIGhlbHBzIGRldGVybWluZSBvZiB0aGVyZSBpcyBtb3JlIGRhdGEgdG8gc2x1cnAKYGBge3J9CnBhdGllbnRzJGxpbmtbWzFdXQoKYGBgClRoZSBhY3R1YWwgcGF0aWVudCBkYXRhIHNlZW1zIHRvIGJlIGluIGEgbGlzdCBjb2x1bW4gY2FsbGVkICJlbnRyeSIKaW4gZW50cnkgaXMgYSBkYXRhZnJhbWUKYGBge3J9CmhlYWQocGF0aWVudHMkZW50cnlbWzFdXSRmdWxsVXJsKQpgYGAKVGhlIGFjdHVhbCBwYXRpZW50IHJlY29yZHMgbWF5IGJlIGluIHRoZSBjb2x1bW4gY2FsbCByZXNvdXJjZQpgYGB7cn0KcGF0aWVudHNfZGYgPC0gcGF0aWVudHMkZW50cnlbWzFdXSRyZXNvdXJjZQpgYGAKCmV4cGxvcmUgdGhlIHBhdGllbnRfZGYKYGBge3J9Cm5hbWVzKHBhdGllbnRzX2RmKQpoZWFkKHBhdGllbnRzX2RmJG5hbWUpCm1hcChwYXRpZW50c19kZix0eXBlb2YpCmBgYAoKCjFzdCBwYXRpZW50CmBgYHtyfQoKZmlyc3RfcGF0aWVudCA8LSBwYXRpZW50c19kZlsxLCBdCiNleGNsdWRlIHBob3RvCmhlYWQoZmlyc3RfcGF0aWVudFssLTE0XSkKYGBgCgpgYGB7cn0KZmlyc3RfcGF0aWVudF9kZiA8LSB0aWJibGUoCm5hbWUgPSBmaXJzdF9wYXRpZW50JG5hbWVbWzFdXSRmYW1pbHlbZmlyc3RfcGF0aWVudCRuYW1lW1sxXV0kdXNlID09ICJvZmZpY2lhbCJdLApob21lX3Bob25lID0gZmlyc3RfcGF0aWVudCR0ZWxlY29tW1sxXV0kdmFsdWVbZmlyc3RfcGF0aWVudCR0ZWxlY29tW1sxXV0kdXNlID09ICJob21lIl0sCmdlbmRlciA9IGZpcnN0X3BhdGllbnQkZ2VuZGVyLApiaXJ0aERhdGUgPSBhcy5EYXRlKGZpcnN0X3BhdGllbnQkYmlydGhEYXRlKSwKY2l0eSA9IGZpcnN0X3BhdGllbnQkYWRkcmVzc1tbMV1dJGNpdHkKKQpmaXJzdF9wYXRpZW50X2RmCgpgYGAKY3JlYXRlIGEgZnVuY3Rpb24gdG8gcHVsbCB0aGlzIGRhdCBmb3IgZWFjaCBwYXRpZW50IGludG8gb25lIGRhdGFmcmFtZQpgYGB7cn0KYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpewogICAgICB0aWJibGUoCiAgICAgICAgICBuYW1lID0gcGF0aWVudCRuYW1lW1sxXV0kZmFtaWx5W3BhdGllbnQkbmFtZVtbMV1dJHVzZSA9PSAib2ZmaWNpYWwiXSwKICAgICAgICAgIGhvbWVfcGhvbmUgPSBwYXRpZW50JHRlbGVjb21bWzFdXSR2YWx1ZVtwYXRpZW50JHRlbGVjb21bWzFdXSR1c2UgPT0gImhvbWUiXSwKICAgICAgICAgIGdlbmRlciA9IHBhdGllbnQkZ2VuZGVyLAogICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksCiAgICAgICAgICBjaXR5ID0gcGF0aWVudCRhZGRyZXNzW1sxXV0kY2l0eQogICAgKQoKfQpiYXNpY19wYXRpZW50X2RldGFpbHMoZmlyc3RfcGF0aWVudCkKYGBgCgpBcHBseSB0aGlzIGZ1bmN0aW9uIHRvIG91ciBkYXRhc2V0IApgYGB7cn0KbnJvd3MgPC0gbnJvdyhwYXRpZW50c19kZikKCgpiYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNfZGZbMiwgXSkKCm1hcF9kZnIoc2VxX2xlbihucm93cyksCiAgICAgICAgZnVuY3Rpb24oeCwgcGF0aWVudHMpewogICAgICAgIGJhc2ljX3BhdGllbnRfZGV0YWlscyhwYXRpZW50c1t4LCBdKQogICAgICAgIH0KICAgICAgICAsIHBhdGllbnRzID0gcGF0aWVudHNfZGYpCmBgYAoKQnJpbmcgaXQgYWxsIHRvZ2V0aGVyCgpgYGB7cn0KCgoKYmFzaWNfcGF0aWVudF9kZXRhaWxzIDwtIGZ1bmN0aW9uKHBhdGllbnQpewogICAgICB0aWJibGUoCiAgICAgICAgICBuYW1lID0gcGF0aWVudCRuYW1lW1sxXV0kZmFtaWx5W3BhdGllbnQkbmFtZVtbMV1dJHVzZSA9PSAib2ZmaWNpYWwiXSwKICAgICAgICAgIGhvbWVfcGhvbmUgPSBwYXRpZW50JHRlbGVjb21bWzFdXSR2YWx1ZVtwYXRpZW50JHRlbGVjb21bWzFdXSR1c2UgPT0gImhvbWUiXSwKICAgICAgICAgIGdlbmRlciA9IHBhdGllbnQkZ2VuZGVyLAogICAgICAgICAgYmlydGhEYXRlID0gYXMuRGF0ZShwYXRpZW50JGJpcnRoRGF0ZSksCiAgICAgICAgICBjaXR5ID0gcGF0aWVudCRhZGRyZXNzW1sxXV0kY2l0eQogICAgKQoKfQoKY2xpZW50ID0gZmhpckNsaWVudCRuZXcoImh0dHA6Ly90ZXN0LmZoaXIub3JnL3IzIikKcGF0aWVudHMgPSBjbGllbnQkcmVhZChsb2NhdGlvbiA9ICJQYXRpZW50Iiwgc3VtbWFyeVR5cGUgPSAianNvbiIpCgpwYXRpZW50c19kZiA8LSBwYXRpZW50cyRlbnRyeVtbMV1dJHJlc291cmNlCgoKCm5yb3dzIDwtIG5yb3cocGF0aWVudHNfZGYpCgptYXBfZGZyKHNlcV9sZW4obnJvd3MpLAogICAgICAgIGZ1bmN0aW9uKHgsIHBhdGllbnRzKXsKICAgICAgICBiYXNpY19wYXRpZW50X2RldGFpbHMocGF0aWVudHNbeCwgXSkKICAgICAgICB9CiAgICAgICAgLCBwYXRpZW50cyA9IHBhdGllbnRzX2RmKQoKYGBgCgoKCgoKCgo=</div>
 
 
 
