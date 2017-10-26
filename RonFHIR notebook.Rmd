@@ -11,13 +11,18 @@ Install the RonFHIR library
 library(RonFHIR)
 library(dplyr)
 library(purrr)
+library(ggplot2)
+library(lubridate)
+library(ggridges)
 ```
+##The Upshot
 a tidy data frame for 50 patients' basic demographic details
 
 ```{r}
 
 
-
+#helper function to extract one row of data per patient
+#so many nested lists and dataframes
 basic_patient_details <- function(patient){
       tibble(
           name = patient$name[[1]]$family[patient$name[[1]]$use == "official"],
@@ -29,25 +34,86 @@ basic_patient_details <- function(patient){
 
 }
 
+#A function to get tidy patients
+get_patients <- function(endpoint = "http://test.fhir.org/r3") {
+#Start a client
 client = fhirClient$new("http://test.fhir.org/r3")
+#give me the patients
 patients = client$read(location = "Patient", summaryType = "json")
 
+# grab the patient resource
 patients_df <- patients$entry[[1]]$resource
 
 
-
+#ho many patients do i have
 nrows <- nrow(patients_df)
+
+#for each patient convert to it to run row and then munge
+#the back into dataframe
 
 map_dfr(seq_len(nrows),
         function(x, patients){
         basic_patient_details(patients[x, ])
         }
         , patients = patients_df)
+}
+(patient_list <- get_patients("http://test.fhir.org/r3"))
+```
+##Lets plot count by city
 
+```{r}
+patient_list %>%
+  ggplot(aes(x = city, fill = city)) +
+  geom_bar() +
+  ggplot2::ggtitle("Where are our patients from?","Count of patient by city") + theme(axis.line=element_blank(),axis.text.x=element_text(angle = -45, hjust = 0),
+         axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank()
+  )
+  ggsave("whereFrom.png", width = 12, height = 8)
+
+
+```
+##Lets plot gender
+```{r}
+patient_list %>%
+  ggplot(aes(x = gender, fill = gender)) +
+  geom_bar() +
+  ggtitle("What gender do our patients identify with?", "COunt of patients by identified gender") +
+  theme(axis.line=element_blank(),
+         axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank()
+  )
+    ggsave("gender.png", width = 12, height = 8)
+```
+##Lets figure out the age of our patients
+```{r}
+patient_list$age <- round( lubridate::interval(start = patient_list$birthDate, end = Sys.Date() ) / 
+                     lubridate::duration(num = 1, units = "years"))
+patient_list %>% 
+  ggplot(aes(x = age, y = gender, fill = gender)) + 
+  geom_density_ridges() +
+  ggtitle("What is the age profile of our patients", "Distribution of patient age by identified gender") +
+  theme(axis.line=element_blank(),
+         axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank()
+  )
+    ggsave("genderage.png", width = 12, height = 8)
+  
 ```
 
 
 
+
+##The Details
 Connect to the FHIR API
 ```{r}
 client = fhirClient$new("http://test.fhir.org/r3")
@@ -66,10 +132,6 @@ current_patient_name <- patient_name[patient_name$use == "official",]
 paste("Surname:", current_patient_name$family)
 paste("Given names:", current_patient_name$given)
 paste("Patient UR:",patient$identifier[[1]]$value[1])
-
-
-
-
 
 ```
 
