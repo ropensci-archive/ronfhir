@@ -2,7 +2,7 @@
 title: "R on FHIR  example"
 output:
   html_document: default
-  html_notebook: default
+
 ---
 Install the RonFHIR library
 ```{r}
