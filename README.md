@@ -40,6 +40,7 @@ print(c)
 d <- client$qraphQL(location = NULL, query = "{PatientList(name:\"pet\"){name @first @flatten{family,given @first}}}")
 print(d)
 
+# invoking a FHIR operation
 e <- client$operation(resource = "Observation", id = NULL, name = "lastn", parameters = "max=3&patient=Patient/example&category=vital-signs")
 print(e)
 
