@@ -101,9 +101,9 @@ Specifically, we added 4 directives to the FHIR profile on graphQL:
 
 These directives are documented in the [FHIR documentation](http://build.fhir.org/graphql.html) and 
 can be used to flatten the data before presenting it in FHIR. This is better because 
-# it's more efficient to limit and reframe the data before transmission
-# doing the reformatting in graphQL means that it can be used outside R as well
-# graphql is a language with considerable support and the same technique could be adopted elsewhere too
+* it's more efficient to limit and reframe the data before transmission
+* doing the reformatting in graphQL means that it can be used outside R as well
+* graphql is a language with considerable support and the same technique could be adopted elsewhere too
 
 Note that not all the transformation will be able to be done in graphQL. This is a 90/10 thing.
 Additional data cleansing will almost always be needed.
