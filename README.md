@@ -82,7 +82,7 @@ Some graphs generated from data accessed by the library, based on the patient li
 
 ## Re-organizing the data
 
-FHIR Resources are often quite nested- real like messy operational data.
+FHIR Resources are often quite nested- like real messy operational data.
 A straight import like the example above generates deeply nested data frames
 that need might need quite a bit of work the reshape them to a useful 
 form for data. But each analyses will need a different reshaping. For 
