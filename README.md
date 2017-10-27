@@ -85,15 +85,18 @@ Some graphs generated from data accessed by the library, based on the patient li
 FHIR Resources are often quite nested- like real messy operational data.
 A straight import like the example above generates deeply nested data frames
 that need might need quite a bit of work the reshape them to a useful 
-form for data. But each analyses will need a different reshaping. For 
+form for data analysis. But each analysis will need a different reshaping. For 
 example, in FHIR, patients have multiple names (the name they use, 
-their legal name, their maiden name, etc). But most analysis doesn't
-care about that- just use the current name. Unless, that is, the 
-analysis is about the name types...
+their legal name, their maiden name, etc). But most analyses don't
+care about that - they just want to use the current name for reference. 
+Unless, that is, the analysis is about the name types. This pattern is 
+ubiquitious - while there's some very common simplifications, there's 
+a very long tail. Classically, this process is called ETL (Extract, Transform, Load). 
 
-Classically, this process is called ETL (Extract, Transform, Load). Rather than
-leaving this data cleansing functionality to R, we extended graphQL, which
-is used in FHIR, to provide additional functionality to R consumers.
+Rather than leaving this data cleansing functionality to R (and/or writing 
+some common simplifications in R), we extended [graphQL](http://graphql.org/), 
+which is already used in FHIR, to provide additional data cleansing functionality 
+to R consumers.
 
 Specifically, we added 4 directives to the FHIR profile on graphQL:
 * @flatten
