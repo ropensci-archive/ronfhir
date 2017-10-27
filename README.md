@@ -40,6 +40,9 @@ print(c)
 d <- client$qraphQL(location = NULL, query = "{PatientList(name:\"pet\"){name @first @flatten{family,given @first}}}")
 print(d)
 
+e <- client$operation(resource = "Observation", id = NULL, name = "lastn", parameters = "max=3&patient=Patient/example&category=vital-signs")
+print(e)
+
 ```
 
 The output from running this:
@@ -62,6 +65,12 @@ d <- client$qraphQL(location = NULL, query = "{PatientList(name:\"pet\"){name @f
 d:
   PatientList
 1 Chalmers, Chalmers...., Peter, Rose...
+
+e:
+  resourceType                                 id          lastUpdated      type
+1       Bundle 8431d84e-2205-4b0f-ad13-895dfee3a6 2017-10-27T04:26:38Z searchset                   
+                                             link
+1 self, http://test.fhir.org/r3/Observation/$lastn?_format=application/fhir+json&&patient=Patient/example&category=vital%2Dsigns&_sort=_id
 
 ```
 
@@ -394,7 +403,6 @@ and
 The following things are still to be done:
 
 * add support for OAuth authentication to the server (2 and 3 legged)
-* add support for operations 
 * add support for aysnochronous nd-json API
 
 

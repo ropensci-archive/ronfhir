@@ -23,4 +23,5 @@ d <- client$qraphQL(location = NULL, query = "{PatientList(name:\"pet\"){name @f
 print(d)
 
 # now, an operation 
-# e <- client$operation(resource = "Observation", name = "lastn", patient = "example")
+e <- client$operation(resource = "Observation", id = NULL, name = "lastn", parameters = "max=3&patient=Patient/example&category=vital-signs")
+print(e)
