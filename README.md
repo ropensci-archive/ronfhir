@@ -14,7 +14,7 @@ first developed by Sander Laverman (Furore).
 We enhanced the API, and tested the functionality against the server on 
 [http://test.fhir.org](http://test.fhir.org)
 
-[Pull Request]https://github.com/furore-fhir/RonFHIR/pull/1()
+[Pull Request](https://github.com/furore-fhir/RonFHIR/pull/1)
 
 ## Code Fragment
 
