@@ -130,8 +130,65 @@ Notes:
 * If @flatten is used on an element with repeating cardinality, then by default, all the children will become lists
 * When using @flatten, all the collated children must have the same FHIR type. The server SHALL return an error if they don't
 
+For an example, take this Patient resource:
 
-For an example, take this graphQL, and apply it to the patient example:
+```
+{
+  "resourceType": "Patient",
+  "id": "example",
+  "identifier": [
+    {
+      "use": "usual",
+      "type": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/v2/0203",
+            "code": "MR"
+          }
+        ]
+      },
+      "system": "urn:oid:1.2.36.146.595.217.0.1",
+      "value": "12345",
+      "period": {
+        "start": "2001-05-06"
+      },
+      "assigner": {
+        "display": "Acme Healthcare"
+      }
+    }
+  ],
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Chalmers",
+      "given": [
+        "Peter",
+        "James"
+      ]
+    },
+    {
+      "use": "usual",
+      "given": [
+        "Jim"
+      ]
+    },
+    {
+      "use": "maiden",
+      "family": "Windsor",
+      "given": [
+        "Peter",
+        "James"
+      ],
+      "period": {
+        "end": "2002"
+      }
+    }
+  ]
+}
+```
+
+Take this graphQL, and apply it to the example:
 
 ```
 {
