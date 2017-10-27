@@ -389,6 +389,13 @@ and
 }
 ```
 
+# Still to be done
+
+The following things are still to be done:
+
+* add support for OAuth authentication to the server (2 and 3 legged)
+* add support for operations 
+* add support for aysnochronous nd-json API
 
 
 
